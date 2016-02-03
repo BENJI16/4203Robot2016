@@ -43,8 +43,7 @@ public class Drive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.driveForward(oi.throttle);
-    	driveTrain.driveForward(oi.turn);
+    	driveTrain.setDrive(oi.throttle,oi.turn);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -33,8 +33,7 @@ public class OI {
 	public Joystick driveStick = new Joystick(0);
 	public double throttle = driveStick.getY();
 	public double turn = driveStick.getX();
-	public double yaxis = driveStick.getY();
-	public double xaxis = driveStick.getZ();
+	public double zaxis = driveStick.getZ();
 	
 	// There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
