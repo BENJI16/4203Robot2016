@@ -19,6 +19,11 @@ public interface RobotMap {
 
     //Compressor port
     public static int pneumaticsCompressor = 0;
+    
+    //Controller button mapping
+    public static int intakeOnButton = 1;
+    public static int intakeRaiseButton = 2;
+    public static int intakeLowerButton = 3;
 
 
 }

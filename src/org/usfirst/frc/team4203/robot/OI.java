@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4203.robot;
 
 import org.usfirst.frc.team4203.robot.commands.*;
+import org.usfirst.frc.team4203.robot.subsystems.*;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,23 +14,58 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    
+	
+    //Controllers
 	public Joystick driveStick;
+	
+	//Axis
 	public double throttle;
 	public double turn;
-	public JoystickButton intakeOn;
 	public double intakeSpeed;
 	
-    public OI() {
-    	
+	//Buttons
+	public JoystickButton intakeOnButton;
+	public JoystickButton intakeRaiseButton;
+	public JoystickButton intakeLowerButton;
+	public boolean intakeOnButtonValue;
+	public boolean intakeRaiseButtonValue;
+	public boolean intakeLowerButtonValue;
+	
+	public double compressorValue;
+    
+	public OI() {
+		
+    	//Controller
+		driveStick = new Joystick(1);
+		
+		//Axis
     	throttle = driveStick.getY();
     	turn = driveStick.getX();
     	intakeSpeed = driveStick.getZ();
-    	intakeOn = new JoystickButton(driveStick,1);
     	
-    	intakeOn.whileHeld(new IntakeRun());
+    	//Buttons
+    	intakeOnButton = new JoystickButton(driveStick,RobotMap.intakeOnButton);
+    	intakeRaiseButton = new JoystickButton(driveStick,RobotMap.intakeRaiseButton);
+    	intakeLowerButton = new JoystickButton(driveStick,RobotMap.intakeLowerButton);
+    	intakeOnButtonValue = intakeOnButton.get();
+    	intakeRaiseButtonValue = intakeRaiseButton.get();
+    	intakeLowerButtonValue = intakeLowerButton.get();
     	
-    	SmartDashboard.putData("Enable Drive", new Drive());
+    	//Command button assignment
+    	intakeOnButton.whileHeld(new IntakeRun());
+    	intakeRaiseButton.whenPressed(new IntakeRaise());
+    	intakeLowerButton.whenPressed(new IntakeLower());
+    	
+    	//SmartDashBoard and constant commands
+    	SmartDashboard.putData("Drive Enabled", new Drive());
+    	SmartDashboard.putNumber("Drive Speed", throttle);
+    	SmartDashboard.putNumber("Turn Speed", turn);
+    	
+    	SmartDashboard.putBoolean("Intake On", intakeOnButtonValue);
+    	SmartDashboard.putBoolean("Intake Raised", intakeRaiseButtonValue);
+    	SmartDashboard.putBoolean("Intake Lowered", intakeLowerButtonValue);
+    	
+    	SmartDashboard.putData("Compressor On", new CompressorOn());
    }
     
 }

@@ -2,21 +2,18 @@ package org.usfirst.frc.team4203.robot.commands;
 
 // import all subsystems to be used by commands
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team4203.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4203.robot.subsystems.Aimer;
-import org.usfirst.frc.team4203.robot.subsystems.Intake;
-import org.usfirst.frc.team4203.robot.subsystems.Pneumatics;
-import org.usfirst.frc.team4203.robot.subsystems.Shooter;
 import org.usfirst.frc.team4203.robot.OI;
+import org.usfirst.frc.team4203.robot.subsystems.*;
 
 public abstract class CommandBase extends Command {
 
 	public static OI oi;
 	public static Aimer aimer = new Aimer();
 	public static Intake intake = new Intake();
-	public static Pneumatics pneumatics = new Pneumatics();
 	public static Shooter shooter = new Shooter();
 	public static DriveTrain driveTrain = new DriveTrain(); 
+	public static IntakePneumatics intakePneumatics = new IntakePneumatics();
+	public static Pneumatics pneumatics = new Pneumatics();
 
     
     public static void init() {

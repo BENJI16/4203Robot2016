@@ -24,9 +24,10 @@ public class Robot extends IterativeRobot {
     public static Intake intake;
     public static Shooter shooter;
     public static Aimer aimer;
-    public static Pneumatics pneumatics;
+    public static IntakePneumatics intakePneumatics;
     public static Drive Drive;
     public static IntakeRun IntakeRun;
+    public static Pneumatics pneumatics;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -39,7 +40,8 @@ public class Robot extends IterativeRobot {
         shooter = new Shooter();
         aimer = new Aimer();
         pneumatics = new Pneumatics();
-
+        intakePneumatics = new IntakePneumatics();
+        
         oi = new OI();
 
     }
