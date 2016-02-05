@@ -34,16 +34,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-
-    	driveTrain = new DriveTrain();
-        intake = new Intake();
-        shooter = new Shooter();
-        aimer = new Aimer();
-        pneumatics = new Pneumatics();
-        intakePneumatics = new IntakePneumatics();
-        
-        oi = new OI();
-
+    	CommandBase.init();
     }
 
     /**

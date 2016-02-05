@@ -36,7 +36,7 @@ public class OI {
 	public OI() {
 		
     	//Controller
-		driveStick = new Joystick(1);
+		driveStick = new Joystick(RobotMap.controller);
 		
 		//Axis
     	throttle = driveStick.getY();
@@ -52,9 +52,8 @@ public class OI {
     	intakeLowerButtonValue = intakeLowerButton.get();
     	
     	//Command button assignment
-    	intakeOnButton.whileHeld(new IntakeRun());
-    	intakeRaiseButton.whenPressed(new IntakeRaise());
-    	intakeLowerButton.whenPressed(new IntakeLower());
+    	intakeOnButton.whenPressed(new IntakeRun());
+
     	
     	//SmartDashBoard and constant commands
     	SmartDashboard.putData("Drive Enabled", new Drive());
