@@ -9,9 +9,6 @@ import org.usfirst.frc.team4203.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team4203.robot.subsystems.Shooter;
 import org.usfirst.frc.team4203.robot.OI;
 
-/**
- *
- */
 public abstract class CommandBase extends Command {
 
 	public static OI oi;
