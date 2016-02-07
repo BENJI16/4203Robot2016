@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team4203.robot.commands.*;
-import org.usfirst.frc.team4203.robot.subsystems.*;
-
+import org.usfirst.frc.team4203.robot.commands.CommandBase;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -17,17 +15,6 @@ import org.usfirst.frc.team4203.robot.subsystems.*;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
-
-    public static OI oi;
-
-    public static DriveTrain driveTrain;
-    public static Intake intake;
-    public static Shooter shooter;
-    public static Aimer aimer;
-    public static IntakePneumatics intakePneumatics;
-    public static Drive Drive;
-    public static IntakeRun IntakeRun;
-    public static Pneumatics pneumatics;
 
     /**
      * This function is run when the robot is first started up and should be

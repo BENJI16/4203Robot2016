@@ -16,56 +16,33 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	
     //Controllers
-	public Joystick driveStick;
-	
-	//Axis
-	public double throttle;
-	public double turn;
-	public double intakeSpeed;
+	private Joystick driveStick;
 	
 	//Buttons
-	public JoystickButton intakeOnButton;
-	public JoystickButton intakeRaiseButton;
-	public JoystickButton intakeLowerButton;
-	public boolean intakeOnButtonValue;
-	public boolean intakeRaiseButtonValue;
-	public boolean intakeLowerButtonValue;
+	private JoystickButton intakeOnButton;
+	private JoystickButton intakeRaiseLowerButton;
 	
-	public double compressorValue;
-    
 	public OI() {
 		
     	//Controller
-		driveStick = new Joystick(RobotMap.controller);
-		
-		//Axis
-    	throttle = driveStick.getY();
-    	turn = driveStick.getX();
-    	intakeSpeed = driveStick.getZ();
+		driveStick = new Joystick(1);
     	
     	//Buttons
     	intakeOnButton = new JoystickButton(driveStick,RobotMap.intakeOnButton);
-    	intakeRaiseButton = new JoystickButton(driveStick,RobotMap.intakeRaiseButton);
-    	intakeLowerButton = new JoystickButton(driveStick,RobotMap.intakeLowerButton);
-    	intakeOnButtonValue = intakeOnButton.get();
-    	intakeRaiseButtonValue = intakeRaiseButton.get();
-    	intakeLowerButtonValue = intakeLowerButton.get();
+    	intakeRaiseLowerButton = new JoystickButton(driveStick,RobotMap.intakeRaiseLowerButton);
     	
     	//Command button assignment
-    	intakeOnButton.whenPressed(new IntakeRun());
-
+    	intakeOnButton.whileHeld(new IntakeRun());
     	
     	//SmartDashBoard and constant commands
-    	SmartDashboard.putData("Drive Enabled", new Drive());
-    	SmartDashboard.putNumber("Drive Speed", throttle);
-    	SmartDashboard.putNumber("Turn Speed", turn);
-    	
-    	SmartDashboard.putBoolean("Intake On", intakeOnButtonValue);
-    	SmartDashboard.putBoolean("Intake Raised", intakeRaiseButtonValue);
-    	SmartDashboard.putBoolean("Intake Lowered", intakeLowerButtonValue);
-    	
     	SmartDashboard.putData("Compressor On", new CompressorOn());
    }
+	public Joystick getJoystick(){
+		return driveStick;
+	}
+	public JoystickButton getIntakeButton(){
+		return intakeRaiseLowerButton;
+	}
     
 }
 

@@ -15,11 +15,13 @@ public class Intake extends Subsystem {
 
     private final CANTalon intakeMotor = new CANTalon(RobotMap.intakeIntakeMotor);
 
-    public void initDefaultCommand() {
-    }
     public void intakeOn(double speed){
     	intakeMotor.set(speed);
     }
+
+	protected void initDefaultCommand() {
+		
+	}
 
     
 }
