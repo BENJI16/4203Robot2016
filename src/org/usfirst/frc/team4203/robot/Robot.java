@@ -5,6 +5,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team4203.robot.commands.CommandBase;
+import org.usfirst.frc.team4203.robot.commands.Drive;
+import org.usfirst.frc.team4203.robot.commands.IntakeLower;
+import org.usfirst.frc.team4203.robot.commands.IntakeRaise;
+import edu.wpi.first.wpilibj.GyroBase;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.CameraServer;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -13,15 +20,20 @@ import org.usfirst.frc.team4203.robot.commands.CommandBase;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-    Command autonomousCommand;
-
+	CameraServer camServer;
+ 
+	//static Gyro gyro = new AnalogGyro(RobotMap.gyroPort);
+	Command intakeRaise,intakeLower,drive;	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
     	CommandBase.init();
+    	drive = new Drive();
+    	camServer = CameraServer.getInstance();
+        camServer.setQuality(50);
+        camServer.startAutomaticCapture("cam0");
     }
 
     /**
@@ -38,7 +50,6 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -49,12 +60,11 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	drive.start();
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-        
+        // this line or comment it out.    	        
     }
 
     /**

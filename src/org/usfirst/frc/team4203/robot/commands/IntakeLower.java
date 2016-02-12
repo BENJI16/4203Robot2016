@@ -2,12 +2,16 @@ package org.usfirst.frc.team4203.robot.commands;
 
 public class IntakeLower extends CommandBase{
 
-	protected void initialize() {
+	public IntakeLower() {
 		requires(intakePneumatics);
+	}
+	
+	protected void initialize() {
+		
 		}
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() {
-	    intakePneumatics.intakeLower(oi.intakeLowerButton);
+	    intakePneumatics.lowerIntake(oi.intakeLowerButton);
 	    }
 
 	    // Make this return true when this Command no longer needs to run execute()

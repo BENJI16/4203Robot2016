@@ -7,6 +7,7 @@ import org.usfirst.frc.team4203.robot.subsystems.*;
 
 public abstract class CommandBase extends Command {
 
+	Command IntakeRaise, IntakeLower;
 	public static OI oi;
 	public static Aimer aimer = new Aimer();
 	public static Intake intake = new Intake();
@@ -14,10 +15,10 @@ public abstract class CommandBase extends Command {
 	public static DriveTrain driveTrain = new DriveTrain(); 
 	public static IntakePneumatics intakePneumatics = new IntakePneumatics();
 	public static Pneumatics pneumatics = new Pneumatics();
-
+	//public static CameraGoal findGoal = new CameraGoal();
     
     public static void init() {
-    oi = new OI();
+    oi = new OI();    
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {

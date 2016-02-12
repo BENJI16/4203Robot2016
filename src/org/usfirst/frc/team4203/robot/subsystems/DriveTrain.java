@@ -6,15 +6,18 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.RobotDrive;
 
+
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
 
-	
-    private CANTalon lMotor = new CANTalon(RobotMap.driveTrainLMotor1);
-    private CANTalon rMotor = new CANTalon(RobotMap.driveTrainLMotor2);
+    public CANTalon lMotor = new CANTalon(RobotMap.driveTrainLMotor1);
+    public CANTalon rMotor = new CANTalon(RobotMap.driveTrainLMotor2);
     
-    private RobotDrive driveMotors = new RobotDrive(lMotor,rMotor);
+    
+    
+    private RobotDrive driveMotors = new RobotDrive(rMotor,lMotor);
     
     public void setDrive(double moveValue,double rotateValue){
     	driveMotors.arcadeDrive(moveValue, rotateValue);
