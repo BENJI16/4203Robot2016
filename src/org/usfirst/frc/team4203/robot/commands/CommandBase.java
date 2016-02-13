@@ -2,6 +2,8 @@ package org.usfirst.frc.team4203.robot.commands;
 
 // import all subsystems to be used by commands
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 import org.usfirst.frc.team4203.robot.OI;
 import org.usfirst.frc.team4203.robot.subsystems.*;
 

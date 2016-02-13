@@ -4,6 +4,8 @@ import org.usfirst.frc.team4203.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team4203.robot.subsystems.Aimer;
 import org.usfirst.frc.team4203.robot.subsystems.DriveTrain;
 
 /**
@@ -21,7 +23,7 @@ public class OI {
 	public JoystickButton gyroResetButton;
 	public JoystickButton intakeRaiseButton;
 	public JoystickButton intakeLowerButton;
-	public JoystickButton aimShootButton;
+	public JoystickButton aimPositionButton;
 	public JoystickButton shootButton;
 	
 	public OI() {
@@ -35,11 +37,12 @@ public class OI {
     	intakeRaiseButton = new JoystickButton(playStick,RobotMap.intakeRaiseButton);
     	intakeLowerButton = new JoystickButton(playStick,RobotMap.intakeLowerButton);
     	gyroResetButton = new JoystickButton(driveStick,RobotMap.gyroResetButton);
-    	aimShootButton = new JoystickButton(playStick,RobotMap.aimShootButton);
+    	aimPositionButton = new JoystickButton(playStick,RobotMap.aimPositionButton);
     	shootButton = new JoystickButton(playStick,RobotMap.shootButton);
     	
     	//Command button assignment
     	intakeOnButton.whileHeld(new IntakeRun());
+    	aimPositionButton.whileHeld(new Aim());
     	intakeRaiseButton.whenPressed(new IntakeRaise());
     	intakeLowerButton.whenPressed(new IntakeLower());
 		
@@ -48,7 +51,7 @@ public class OI {
     	SmartDashboard.putNumber("Speed of Right",RobotMap.driveTrainLMotor2);
    }
 	public Joystick getJoystick(){
-		return driveStick;
+		return playStick;
 	}
     
 }

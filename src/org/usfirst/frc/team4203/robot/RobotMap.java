@@ -21,7 +21,7 @@ public interface RobotMap {
     public static int gyroResetButton = 0;
     public static int intakeRaiseButton = 5;
     public static int intakeLowerButton = 4;
-    public static int aimShootButton = 2;
+    public static int aimPositionButton = 2;
     public static int shootButton = 1; 
     
     //Sensors port mapping
