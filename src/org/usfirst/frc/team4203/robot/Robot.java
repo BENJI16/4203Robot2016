@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4203.robot.commands.Aim;
 import org.usfirst.frc.team4203.robot.commands.CommandBase;
-import org.usfirst.frc.team4203.robot.commands.Drive;
+import org.usfirst.frc.team4203.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team4203.robot.commands.IntakeLower;
-import org.usfirst.frc.team4203.robot.commands.IntakeRaise;
+import org.usfirst.frc.team4203.robot.commands.IntakePosition;
 import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -25,23 +25,21 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
 	CameraServer camServer;
  
-	//static Gyro gyro = new AnalogGyro(RobotMap.gyroPort);
 	Command intakeRaise,intakeLower,drive, aim;	
 	
-	public boolean pullBackState;
+	/*public boolean pullBackState;
 	static DigitalInput digitalPort0 = new DigitalInput(0);
 	public static AnalogInput analogPort0 = new AnalogInput(0);
-	
+	*/
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
     	CommandBase.init();
-    	drive = new Drive();
-    	aim = new Aim();
     	camServer = CameraServer.getInstance();
         camServer.setQuality(50);
         camServer.startAutomaticCapture("cam0");
@@ -71,8 +69,6 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	drive.start();
-    	aim.start();
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
@@ -83,7 +79,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-		readInputs();
+    	CommandBase.aimer.inputs();
+    	CommandBase.shooter.sensorValue();
+		//readInputs();
         Scheduler.getInstance().run();  
     	LiveWindow.run();
     }
@@ -95,11 +93,10 @@ public class Robot extends IterativeRobot {
     	Scheduler.getInstance().run();
        }
     	//put all digital/analog inputs here, more organized
-    
+    /*
     public void readInputs() {
-    	pullBackState = digitalPort0.get();
     	SmartDashboard.getBoolean("Drawback Switch", pullBackState);
     	SmartDashboard.putNumber("voltage", analogPort0.getVoltage());
     	
-    }
+    }*/
 }

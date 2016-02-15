@@ -6,54 +6,106 @@ import org.usfirst.frc.team4203.robot.Robot;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Aimer extends Subsystem {
 	
-	private final static CANTalon aimMotor = new CANTalon(RobotMap.aimerAimerMotor);
 	
-	public AnalogOutput outputVoltage = new AnalogOutput(0);
-	public static double targetVoltage = 3.5;
+	private final CANTalon aimMotor = new CANTalon(RobotMap.aimerAimerMotor);
+	private final AnalogOutput outputVoltage = new AnalogOutput(0);
+	//private final DigitalInput digitalPort = new DigitalInput(0);
+	private final AnalogInput potInput = new AnalogInput(0);
+	private boolean pullBackState;
+	private double potVoltage;
+	private final double maxVoltage = 4.8;
+	private final double minVoltage = .2;
+	private final double targetVoltage = 3.5;
 	
-	public double port0Voltage;
-	
-	
-	public void aim(){		
-		port0Voltage = Robot.analogPort0.getVoltage();
 
-		if ((port0Voltage) > 4.8) {
-			aimMotor.set(0);
+	
+	public void manualAim(Joystick joystick){
 		
-		if ((targetVoltage - port0Voltage) > 0.2) {
-			aimMotor.set(.5);
+		potVoltage = potInput.getVoltage();
+		double zaxis = joystick.getZ();
+		double zTargetVoltage = (1.6*zaxis) + 1.9;
+		
+		if (potVoltage > maxVoltage || potVoltage < minVoltage) {
+			
+			aimMotor.set(0);
+			
+		}
+		
+		else{
+			
+			if((zTargetVoltage - potVoltage) > .05){
+				
+				aimMotor.set(.1);
+				
+			}
+			
+			else if((zTargetVoltage - potVoltage) < -.05){
+				
+				aimMotor.set(-.1);
+				
+			}
+			
+			else if((zTargetVoltage - potVoltage) < .5 || (zTargetVoltage - potVoltage) > -.5){
+				
+				aimMotor.set(0);
+				
+			}
+			
+		}
+
+	}
+	
+	public void targetAim(){
+		
+    	//pullBackState = digitalPort.get();
+		potVoltage = potInput.getVoltage();
+		
+		if (potVoltage > maxVoltage || potVoltage < minVoltage) {
+			
+			aimMotor.set(0);
+			
+		}
+		
+		else{
+			
+			if ((targetVoltage - potVoltage) > 0.3) {
+				
+				aimMotor.set(.3);
+			
+			}
+			
+			else if(potVoltage < 0.3) {
+				
+				aimMotor.set(.1);
+			
+			}
+		
+			else {
+			
+				aimMotor.set(0);
+			
 			}
 		}
-		if ((port0Voltage) < 0.2) {
-			aimMotor.set(0);
-		}
-		
-		else {
-			aimMotor.set(.1);
-		}
 	}
 	
-	public void shortTargetPosition(){
+	public void inputs(){
 		
-	}
+		SmartDashboard.getBoolean("Drawback Switch", pullBackState);
+    	SmartDashboard.putNumber("voltage", potInput.getVoltage());
 	
-	public void mediumTargetPosition(){
-		
 	}
-	
-	public void longTargetPosition(){
-		
-	}
-	
+
     public void initDefaultCommand() {
-    		setDefaultCommand(new Aim());
+    		setDefaultCommand(new ManualAim());
     }
 }
 

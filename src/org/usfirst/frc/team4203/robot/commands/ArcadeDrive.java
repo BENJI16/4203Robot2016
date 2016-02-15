@@ -1,10 +1,11 @@
 package org.usfirst.frc.team4203.robot.commands;
 
 
-public class CompressorOn extends CommandBase {
+public class ArcadeDrive extends CommandBase {
 
-    public CompressorOn() {
-        requires(pneumatics);
+    public ArcadeDrive() {
+
+        requires(driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -13,8 +14,8 @@ public class CompressorOn extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	pneumatics.compressorStart();
-    }
+    	driveTrain.setDrive(-oi.getDriveStick().getY()/2,oi.getDriveStick().getX()/2);
+       }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

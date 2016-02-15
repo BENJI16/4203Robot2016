@@ -12,19 +12,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
 
-    public CANTalon lMotor = new CANTalon(RobotMap.driveTrainLMotor1);
-    public CANTalon rMotor = new CANTalon(RobotMap.driveTrainLMotor2);
-    
-    
-    
+	
+    private CANTalon lMotor = new CANTalon(RobotMap.driveTrainLMotor1);
+    private CANTalon rMotor = new CANTalon(RobotMap.driveTrainLMotor2);
     private RobotDrive driveMotors = new RobotDrive(rMotor,lMotor);
     
+    
     public void setDrive(double moveValue,double rotateValue){
+    	
     	driveMotors.arcadeDrive(moveValue, rotateValue);
+    	
     }
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new Drive());
+    	
+    	setDefaultCommand(new ArcadeDrive());
+    	
     }
+    
 }
 

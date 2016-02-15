@@ -13,14 +13,13 @@ public abstract class CommandBase extends Command {
 	public static OI oi;
 	public static Aimer aimer = new Aimer();
 	public static Intake intake = new Intake();
+	public static IntakePiston intakePiston = new IntakePiston();
 	public static Shooter shooter = new Shooter();
 	public static DriveTrain driveTrain = new DriveTrain(); 
-	public static IntakePneumatics intakePneumatics = new IntakePneumatics();
-	public static Pneumatics pneumatics = new Pneumatics();
-	//public static CameraGoal findGoal = new CameraGoal();
     
     public static void init() {
-    oi = new OI();    
+    oi = new OI();
+    intakePiston.initPosition();
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {

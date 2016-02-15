@@ -13,23 +13,17 @@ public interface RobotMap {
     public static int intakePiston1 =0;
     public static int shooterClaw1 = 1;
 
-    //Compressor port
-    public static int pneumaticsCompressor = 0;
     
     //Controller button mapping
-    public static int intakeOnButton = 3;
     public static int gyroResetButton = 0;
-    public static int intakeRaiseButton = 5;
-    public static int intakeLowerButton = 4;
+    public static int intakeOnButton = 3;
+    public static int intakePositionButton = 5;
     public static int aimPositionButton = 2;
-    public static int shootButton = 1; 
+    public static int loadButton = 4;
+    public static int shootButton = 6; 
     
     //Sensors port mapping
-	public static final int gyroPort = 0;
-
-    //Camera
-    public static int cameraRingLightRelay = 0;
-	public static String cameraIPAddress = "Camera IP";
-
+	public static int gyroPort = 0;
+	public static int limitSwitch = 1;
 
 }

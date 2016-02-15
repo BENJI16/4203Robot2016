@@ -21,10 +21,10 @@ public class OI {
 	//Buttons
 	public JoystickButton intakeOnButton;
 	public JoystickButton gyroResetButton;
-	public JoystickButton intakeRaiseButton;
-	public JoystickButton intakeLowerButton;
+	public JoystickButton intakePositionButton;
 	public JoystickButton aimPositionButton;
 	public JoystickButton shootButton;
+	public JoystickButton loadButton;
 	
 	public OI() {
 		
@@ -34,25 +34,23 @@ public class OI {
 		
     	//Buttons
     	intakeOnButton = new JoystickButton(playStick,RobotMap.intakeOnButton);
-    	intakeRaiseButton = new JoystickButton(playStick,RobotMap.intakeRaiseButton);
-    	intakeLowerButton = new JoystickButton(playStick,RobotMap.intakeLowerButton);
-    	gyroResetButton = new JoystickButton(driveStick,RobotMap.gyroResetButton);
+    	intakePositionButton = new JoystickButton(playStick,RobotMap.intakePositionButton);
     	aimPositionButton = new JoystickButton(playStick,RobotMap.aimPositionButton);
+    	loadButton = new JoystickButton(playStick,RobotMap.loadButton);
     	shootButton = new JoystickButton(playStick,RobotMap.shootButton);
     	
     	//Command button assignment
-    	intakeOnButton.whileHeld(new IntakeRun());
-    	aimPositionButton.whileHeld(new Aim());
-    	intakeRaiseButton.whenPressed(new IntakeRaise());
-    	intakeLowerButton.whenPressed(new IntakeLower());
+    	loadButton.whenPressed(new LoadShooter());
 		
     	//SmartDashBoard and constant commands
-    	SmartDashboard.putNumber("Speed of Left",RobotMap.driveTrainLMotor1);
-    	SmartDashboard.putNumber("Speed of Right",RobotMap.driveTrainLMotor2);
+    	//SmartDashboard.putNumber("Speed of Left",RobotMap.driveTrainLMotor1);
+    	//SmartDashboard.putNumber("Speed of Right",RobotMap.driveTrainLMotor2);
    }
-	public Joystick getJoystick(){
-		return playStick;
+	public Joystick getDriveStick(){
+		return driveStick;
 	}
-    
+    public Joystick getPlayStick(){
+    	return playStick;
+    }
 }
 
