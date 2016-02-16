@@ -15,11 +15,12 @@ public class ManualAim extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	aimer.setDefault();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Joystick stick = oi.getPlayStick();
+    	Joystick stick = oi.getXboxController();
     	double zaxis = stick.getZ();
     	aimer.manualAim(zaxis);
     }
@@ -36,5 +37,6 @@ public class ManualAim extends CommandBase {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	aimer.stop();
     }
 }

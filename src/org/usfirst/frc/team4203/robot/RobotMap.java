@@ -5,13 +5,16 @@ public interface RobotMap {
 	//Motor port mapping
 	public static int driveTrainLMotor1 = 1;
     public static int driveTrainLMotor2 = 2;
-    public static int intakeIntakeMotor = 2;
-    public static int shooterWinchMotor = 4;
-    public static int aimerAimerMotor = 5;
+    public static int intakeIntakeMotor = 0;
+    public static int shooterWinchMotor = 3;
+    public static int aimerAimerMotor = 4;
     
     //Solenoid port mapping
-    public static int intakePiston1 =0;
-    public static int shooterClaw1 = 1;
+    public static int intakePiston1 = 0;
+    public static int intakePiston2 = 1;
+    public static int shooterClaw1 = 2;
+    public static int shooterClaw2 = 3;
+
 
     
     //Controller button mapping

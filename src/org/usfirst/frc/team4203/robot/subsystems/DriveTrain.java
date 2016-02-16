@@ -23,6 +23,18 @@ public class DriveTrain extends Subsystem {
     	driveMotors.arcadeDrive(moveValue, rotateValue);
     	
     }
+    
+    public void stopDrive(){
+    	
+    	driveMotors.arcadeDrive(0, 0);
+	
+    }
+    
+    public void setPrecisionDrive(double rotateValue){
+    	
+    	driveMotors.arcadeDrive(0, rotateValue);
+    	
+    }
 
     public void initDefaultCommand() {
     	

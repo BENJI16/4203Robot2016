@@ -3,6 +3,7 @@ package org.usfirst.frc.team4203.robot.subsystems;
 import org.usfirst.frc.team4203.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,7 +13,7 @@ public class Shooter extends Subsystem {
 	
 	private CANTalon pullBackMotor = new CANTalon(RobotMap.shooterWinchMotor);
 	private DigitalInput limit = new DigitalInput(RobotMap.limitSwitch);
-	private Solenoid piston = new Solenoid(RobotMap.shooterClaw1);
+	private DoubleSolenoid piston = new DoubleSolenoid(RobotMap.shooterClaw1,RobotMap.shooterClaw2);
 	
 	
 	public void on(){
@@ -35,18 +36,18 @@ public class Shooter extends Subsystem {
 	
 	public void lock(){
 		
-		piston.set(true);
+		piston.set(DoubleSolenoid.Value.kReverse);
 		
 	}
 	
 	public void fire(){
 		
-		piston.set(false);
+		piston.set(DoubleSolenoid.Value.kForward);
 	}
 	
-	public boolean pistonState(){
+	public String pistonState(){
 		
-		return piston.get();
+		return piston.get().toString();
 		
 	}
 	

@@ -25,8 +25,59 @@ public class Aimer extends Subsystem {
 	private final double maxVoltage = 4.8;
 	private final double minVoltage = .2;
 	private final double targetVoltage = 3.5;
+	private final double defaultVoltage = .3;
 	
 
+	public void setDefault(){
+		
+		potVoltage = potInput.getVoltage();
+		
+		if (potVoltage > maxVoltage || potVoltage < minVoltage) {
+			
+			aimMotor.set(0);
+			
+		}
+		
+		else{
+			
+			if ((defaultVoltage - potVoltage) > 0.3) {
+				
+				aimMotor.set(.3);
+			
+			}
+			
+			else if((defaultVoltage - potVoltage) < -0.3){
+				
+				aimMotor.set(-.3);
+				
+			}
+			
+			else if((defaultVoltage - potVoltage) < 0.3 && (defaultVoltage - potVoltage) > 0){
+				
+				aimMotor.set(.1);
+				
+			}
+			
+			else if((defaultVoltage - potVoltage) > -0.3 && (defaultVoltage - potVoltage) < 0){
+				
+				aimMotor.set(-.1);
+				
+			}
+			
+			else if((defaultVoltage - potVoltage) < .05){
+				
+				aimMotor.set(0);
+				
+			}
+			
+			else if((defaultVoltage - potVoltage) > -.05){
+				
+				aimMotor.set(0);
+				
+			}
+		}
+		
+	}
 	
 	public void manualAim(double zaxis){
 		
@@ -41,31 +92,47 @@ public class Aimer extends Subsystem {
 		
 		else{
 			
-			if((zTargetVoltage - potVoltage) > .05){
+			if ((zTargetVoltage - potVoltage) > 0.3) {
+				
+				aimMotor.set(.3);
+			
+			}
+			
+			else if((zTargetVoltage - potVoltage) < -0.3){
+				
+				aimMotor.set(-.3);
+				
+			}
+			
+			else if((zTargetVoltage - potVoltage) < 0.3 && (zTargetVoltage - potVoltage) > 0){
 				
 				aimMotor.set(.1);
 				
 			}
 			
-			else if((zTargetVoltage - potVoltage) < -.05){
+			else if((zTargetVoltage - potVoltage) > -0.3 && (zTargetVoltage - potVoltage) < 0){
 				
 				aimMotor.set(-.1);
 				
 			}
 			
-			else if((zTargetVoltage - potVoltage) < .5 || (zTargetVoltage - potVoltage) > -.5){
+			else if((zTargetVoltage - potVoltage) < .05){
 				
 				aimMotor.set(0);
 				
 			}
 			
+			else if((zTargetVoltage - potVoltage) > -.05){
+				
+				aimMotor.set(0);
+				
+			}
 		}
 
 	}
 	
 	public void targetAim(){
 		
-    	//pullBackState = digitalPort.get();
 		potVoltage = potInput.getVoltage();
 		
 		if (potVoltage > maxVoltage || potVoltage < minVoltage) {
@@ -114,6 +181,12 @@ public class Aimer extends Subsystem {
 		}
 	}
 	
+	public void stop(){
+		
+		aimMotor.set(0);
+		
+	}
+	
 	public void inputs(){
 		
 		SmartDashboard.getBoolean("Drawback Switch", pullBackState);
@@ -122,7 +195,9 @@ public class Aimer extends Subsystem {
 	}
 
     public void initDefaultCommand() {
+    	
     		setDefaultCommand(new ManualAim());
+    		
     }
 }
 

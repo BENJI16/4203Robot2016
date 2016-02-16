@@ -1,40 +1,41 @@
 package org.usfirst.frc.team4203.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  */
-public class LoadShooter extends CommandBase {
+public class PrecisionDrive extends CommandBase {
 
-    public LoadShooter() {
-    	requires(shooter);
+    public PrecisionDrive() {
+    	requires(driveTrain);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	shooter.on();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(shooter.limit()==true){
-    		shooter.lock();
-    		shooter.off();
-    	}
+    	driveTrain.setPrecisionDrive(oi.getXboxController().getX(GenericHID.Hand.kLeft)/3);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (shooter.pistonState()=="kForward");
+        return false;
     }
 
     // Called once after isFinished returns true
-    protected void end() {    	
+    protected void end() {
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	driveTrain.stopDrive();
     }
 }
