@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4203.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  *
  */
@@ -17,7 +19,9 @@ public class ManualAim extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	aimer.manualAim(oi.getPlayStick());
+    	Joystick stick = oi.getPlayStick();
+    	double zaxis = stick.getZ();
+    	aimer.manualAim(zaxis);
     }
 
     // Make this return true when this Command no longer needs to run execute()

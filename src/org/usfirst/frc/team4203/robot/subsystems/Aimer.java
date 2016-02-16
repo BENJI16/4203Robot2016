@@ -28,10 +28,9 @@ public class Aimer extends Subsystem {
 	
 
 	
-	public void manualAim(Joystick joystick){
+	public void manualAim(double zaxis){
 		
 		potVoltage = potInput.getVoltage();
-		double zaxis = joystick.getZ();
 		double zTargetVoltage = (1.6*zaxis) + 1.9;
 		
 		if (potVoltage > maxVoltage || potVoltage < minVoltage) {
@@ -83,16 +82,34 @@ public class Aimer extends Subsystem {
 			
 			}
 			
-			else if(potVoltage < 0.3) {
+			else if((targetVoltage - potVoltage) < -0.3){
+				
+				aimMotor.set(-.3);
+				
+			}
+			
+			else if((targetVoltage - potVoltage) < 0.3 && (targetVoltage - potVoltage) > 0){
 				
 				aimMotor.set(.1);
-			
+				
 			}
-		
-			else {
 			
+			else if((targetVoltage - potVoltage) > -0.3 && (targetVoltage - potVoltage) < 0){
+				
+				aimMotor.set(-.1);
+				
+			}
+			
+			else if((targetVoltage - potVoltage) < .05){
+				
 				aimMotor.set(0);
+				
+			}
 			
+			else if((targetVoltage - potVoltage) > -.05){
+				
+				aimMotor.set(0);
+				
 			}
 		}
 	}
@@ -100,7 +117,7 @@ public class Aimer extends Subsystem {
 	public void inputs(){
 		
 		SmartDashboard.getBoolean("Drawback Switch", pullBackState);
-    	SmartDashboard.putNumber("voltage", potInput.getVoltage());
+    	SmartDashboard.putNumber("Pot Voltage", potInput.getVoltage());
 	
 	}
 
