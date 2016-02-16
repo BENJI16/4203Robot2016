@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4203.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -21,7 +22,7 @@ public class ManualAim extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Joystick stick = oi.getXboxController();
-    	double zaxis = stick.getZ();
+    	double zaxis = stick.getY(GenericHID.Hand.kLeft);
     	aimer.manualAim(zaxis);
     }
 

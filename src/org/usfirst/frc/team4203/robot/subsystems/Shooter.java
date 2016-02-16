@@ -45,6 +45,12 @@ public class Shooter extends Subsystem {
 		piston.set(DoubleSolenoid.Value.kForward);
 	}
 	
+	public void release(){
+		
+		//pullBackMotor.wait(timeout);
+		
+	}
+	
 	public String pistonState(){
 		
 		return piston.get().toString();
